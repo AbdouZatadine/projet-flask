@@ -1,0 +1,109 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; 
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+h2 {
+    font-size: 2rem; 
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+
+.result-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+.table th {
+    background-color: #7b7bff; 
+    color: white; 
+    font-weight: bold;
+}
+
+
+.btn-custom {
+    border-radius: 5px; 
+    padding: 8px 15px; 
+    font-size: 1rem;
+    text-decoration: none; 
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+
+.btn-download {
+    background-color: #7b7bff; 
+    color: white;
+}
+
+.btn-download:hover {
+    background-color: #6c757d; 
+    transform: translateY(-2px);
+    color: white; 
+}
+
+
+.btn-home {
+    background-color: #6c757d; 
+    color: white;
+}
+
+.btn-home:hover {
+    background-color: #7b7bff; 
+    transform: translateY(-2px); 
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: center; 
+    gap: 15px; 
+    margin-top: 30px;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+.section-content {
+    margin-bottom: 30px;
+}
+

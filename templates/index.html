@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatisation du Traitement des Données</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+   
+    <div class="background-gradient">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+            <div class="hero-box">
+                <h2>Automatiser le traitement des données</h2>
+                <p>Téléchargez un  fichier CSV ou JSON à traiter</p>
+
+                <div class="file-upload-container">
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <label class="custom-file-upload" for="file">Saisir un fichier CSV ou JSON</label>
+                        <input type="file" class="form-control" id="file" name="file" accept=".csv, .json" required>
+                        <button type="submit" class="btn btn-custom">Analyser</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

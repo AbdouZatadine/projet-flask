@@ -1,0 +1,77 @@
+
+.background-gradient {
+    background: linear-gradient(120deg, #e1a3fc, #896698); 
+    height: 100vh;
+}
+.hero-box {
+    background: linear-gradient(120deg, #9b59b6, #1abc9c); 
+    color: white;
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+}
+
+
+p {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 30px;
+}
+
+
+.file-upload-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+
+.custom-file-upload {
+    display: inline-block;
+    background-color: #ddd;
+    color: #333;
+    font-size: 16px;
+    padding: 15px 40px; 
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;  
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+input[type="file"] {
+    display: none;
+}
+
+
+.btn-custom {
+    background-color: #9292fe; 
+    color: white;
+    font-size: 18px;
+    padding: 15px 40px;  
+    border-radius: 50px;
+    text-transform: uppercase;
+    width: 100%; 
+    transition: background-color 0.3s ease;
+    margin-top: 20px; 
+}
+
+.btn-custom:hover {
+    background-color: #7b7bff;
+}
