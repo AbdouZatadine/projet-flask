@@ -3,29 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatisation du Traitement des Données</title>
+    <title>Automatisation du Traitement des Données | DataFlow Pro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4ad66d;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        /* Barre de navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+        
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .card-upload {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .card-upload:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-subtitle {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .card-body {
+            padding: 2.5rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            background: rgba(248, 249, 250, 0.5);
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent-color);
+            background: rgba(76, 201, 240, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-label {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--success-color), #38b000);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(74, 214, 109, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 214, 109, 0.4);
+        }
+        
+        .file-name {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1rem;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .features {
+                flex-direction: column;
+            }
+        }
+
+        /* Section Services */
+        .services {
+            background-color: #f5f7fa;
+            padding: 4rem 0;  /* Augmenté */
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;  /* Augmenté */
+            margin-bottom: 2rem;  /* Augmenté */
+        }
+
+        .service-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-item i {
+            font-size: 3.5rem;  /* Augmenté */
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-item h3 {
+            font-size: 1.8rem;  /* Augmenté */
+            font-weight: 600;
+        }
+
+        .service-item p {
+            font-size: 1.2rem;  /* Augmenté */
+            color: #6c757d;
+        }
+
+        
+        /* Footer */
+        .footer {
+            background-color: #212529;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .footer h4 {
+            font-size: 1.5rem;  /* Augmenté */
+            font-weight: 600;
+        }
+
+        .footer p {
+            font-size: 1.2rem;  /* Augmenté */
+            margin: 0.5rem 0;
+        }
+
+        .footer ul li a {
+            font-size: 1.1rem;  /* Augmenté */
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .features {
+                flex-direction: column;
+            }
+
+            .service-item h3 {
+                font-size: 1.6rem;
+            }
+
+            .service-item p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-   
-    <div class="background-gradient">
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="hero-box">
-                <h2>Automatiser le traitement des données</h2>
-                <p>Téléchargez un  fichier CSV ou JSON à traiter</p>
-
-                <div class="file-upload-container">
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <label class="custom-file-upload" for="file">Saisir un fichier CSV ou JSON</label>
-                        <input type="file" class="form-control" id="file" name="file" accept=".csv, .json" required>
-                        <button type="submit" class="btn btn-custom">Analyser</button>
+        <!-- Barre de navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Cleanify Data</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('index') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('about') }}">À propos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 p-3">
+        <div class="hero-container animate__animated animate__fadeIn">
+            <div class="card-upload">
+                <div class="card-header">
+                    <h1 class="card-title">DataFlow Pro</h1>
+                    <p class="card-subtitle">Automatisation avancée du traitement des données</p>
+                </div>
+                <div class="card-body">
+                    <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+                        <div class="upload-area" id="dropArea">
+                            <div class="upload-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                                </svg>
+                            </div>
+                            <h3 class="mb-3">Déposez votre fichier ici</h3>
+                            <p class="text-muted mb-4">ou</p>
+                            <input type="file" id="fileInput" class="file-input" name="file" accept=".csv, .json" required>
+                            <label for="fileInput" class="file-label">Sélectionner un fichier</label>
+                            <div class="file-name" id="fileName">Aucun fichier sélectionné</div>
+                        </div>
+                        <button type="submit" class="submit-btn">Analyser et Traiter</button>
                     </form>
+                </div>
+            </div>
+            
+            <div class="features mt-4">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                        </svg>
+                    </div>
+                    <h5>CSV & JSON</h5>
+                    <p class="text-muted">Formats pris en charge</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                    </div>
+                    <h5>Sécurisé</h5>
+                    <p class="text-muted">Traitement confidentiel</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    </div>
+                    <h5>Simple</h5>
+                    <p class="text-muted">Interface intuitive</p>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Section Services -->
+    <section class="services mt-5">
+        <h2 class="text-center">Nos Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-file-csv"></i>
+                    </div>
+                    <h3>Nettoyage des Données</h3>
+                    <p>Nettoyez vos fichiers CSV et JSON en toute sécurité et avec efficacité. Supprimez les doublons, gérez les valeurs manquantes, et plus encore.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analyse des Données</h3>
+                    <p>Analysez vos données pour obtenir des insights précieux et détecter les anomalies et tendances importantes.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Exportation des Données</h3>
+                    <p>Exploitez vos données nettoyées et exportez-les dans des formats adaptés à vos besoins (CSV, JSON).</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>À propos</h4>
+                    <p>Cleanify Data est une solution qui vous aide à automatiser le traitement et le nettoyage des données pour des analyses plus efficaces.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Contact</h4>
+                    <p>Email : zatadineabdou12@gmail.com</p>
+                    <p>Téléphone : +221 776491345</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Suivez-nous</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Facebook</a></li>
+                        <li><a href="#" class="text-white">Twitter</a></li>
+                        <li><a href="#" class="text-white">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Affichage du nom du fichier sélectionné
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const fileName = document.getElementById('fileName');
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+            } else {
+                fileName.textContent = 'Aucun fichier sélectionné';
+            }
+        });
+
+        // Gestion du drag and drop
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropArea.classList.add('border-primary');
+            dropArea.style.backgroundColor = 'rgba(76, 201, 240, 0.1)';
+        }
+
+        function unhighlight() {
+            dropArea.classList.remove('border-primary');
+            dropArea.style.backgroundColor = 'rgba(248, 249, 250, 0.5)';
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+            
+            const fileName = document.getElementById('fileName');
+            if (files.length > 0) {
+                fileName.textContent = files[0].name;
+            }
+        }
+    </script>
 </body>
 </html>

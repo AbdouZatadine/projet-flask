@@ -1,0 +1,15 @@
+ID,Nom,Âge,Email,Ville,Salaire
+1,Alice,abc,alice@example.com,Paris,Inconnu
+2,Bob,abc,bob@example.com,Lyon,Inconnu
+3,Charlie,abc,charlie@example.com,Marseille,Inconnu
+4,David,abc,david@example.com,Bordeaux,Inconnu
+5,Eve,abc,invalid_email,Toulouse,Inconnu
+6,Frank,abc,frank@example.com,Bordeaux,Inconnu
+7,Grace,abc,grace@example.com,Lille,Inconnu
+8,Hannah,abc,hannah@example,Strasbourg,Inconnu
+9,Isaac,abc,isaac@example.com,Montpellier,Inconnu
+10,Jack,abc,jack@example.com,Rennes,Inconnu
+11,Kate,abc,kate@example.com,Nice,Inconnu
+12,Leo,abc,leo@example.com,Nantes,Inconnu
+13,Mike,abc,mike@example.com,Dijon,Inconnu
+14,Nina,unknown,nina@example.com,Grenoble,Inconnu

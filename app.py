@@ -20,6 +20,10 @@ def load_json_to_dataframe(file):
     data = json.load(file)
     return pd.json_normalize(data)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')
