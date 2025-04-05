@@ -101,8 +101,6 @@ def upload_file():
 
     return 'Erreur lors du téléchargement du fichier', 400
 
-# Petit test pour GitHub
-
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(CLEANED_FOLDER, filename, as_attachment=True)
