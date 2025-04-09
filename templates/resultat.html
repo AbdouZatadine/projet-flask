@@ -11,7 +11,6 @@
     <div class="container mt-5">
         <h2 class="text-center">Résultats de l'Analyse</h2>
 
-        
         <div class="row section-header">
             <div class="col-md-6 section-content">
                 <h3>Avant traitement :</h3>
@@ -25,7 +24,6 @@
             </div>
         </div>
 
-     
         <div class="section-content">
             <h3 class="text-center">Valeurs Manquantes et Aberrantes :</h3>
             <table class="table table-striped">
@@ -48,7 +46,6 @@
             </table>
         </div>
 
-      
         {% if duplicates_count > 0 %}
         <div class="section-content">
             <h3 class="text-center">Doublons détectés :</h3>
@@ -58,7 +55,6 @@
         <p class="text-center">Aucun doublon détecté.</p>
         {% endif %}
 
-       
         <div class="section-content">
             <h3 class="text-center">Aperçu des données après nettoyage :</h3>
             <table class="table table-striped">
@@ -81,12 +77,37 @@
             </table>
         </div>
 
-    
-        <div class="button-group footer">
-            <a href="{{ url_for('download_file', filename=cleaned_filename) }}" class="btn btn-custom btn-download">Télécharger le fichier nettoyé</a>
-            <a href="{{ url_for('index') }}" class="btn btn-custom btn-home">Retour à l'accueil</a>
-        </div>
+        
     </div>
+
+    <div class="section-content">
+        <h3 class="text-center">Données Normalisées :</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {% for column in normalized_data[0].keys() %}
+                        <th scope="col">{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in normalized_data %}
+                    <tr>
+                        {% for column, value in row.items() %}
+                            <td>{{ value if value is not none else 'N/A' }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="button-group footer">
+        <a href="{{ url_for('download_file', filename=cleaned_filename) }}" class="btn btn-custom btn-download">Télécharger le fichier nettoyé</a>
+        <a href="{{ url_for('download_normalized_file', filename=normalized_filename) }}" class="btn btn-custom btn-download">Télécharger le fichier normalisé</a>
+        <a href="{{ url_for('index') }}" class="btn btn-custom btn-home">Retour à l'accueil</a>
+    </div>
+    
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
